@@ -21,8 +21,22 @@
 /* BASE STYLES
 /*******************************************/
 
-body {
+:root {
+     --main-highlight-color: #05386B;
+     --main-bg-color: #5CDB95;
+     --main-font-color: #EDF5E1;
+     --bg-shadow-color: #379683;
+     --bg-highlight-color: #8EE4AF;
+}
 
+body {
+     font-family: 'Josefin Sans', sans-serif;
+     background-color: var(--main-bg-color);
+     color: var(--main-font-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+     font-family: 'Josefin Slab', serif;
 }
 
 
@@ -30,18 +44,138 @@ body {
 /* LAYOUT
 /*******************************************/
 header {
-
+     color: var(--main-highlight-color);
+     margin: 0 auto;
+     max-width: 1800px;
+     height: 10px;
 }
 
 footer {
 
 }
 
-/******************************************
-/* ADDITIONAL STYLES
-/*******************************************/
+main {
+     margin: 0 auto;
+     max-width: 1800px;
+}
+
+.hero {
+     height: 100vh;
+     min-height: 430px;
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     align-content: center;
+}
 
 
+.hero h1 {
+     font-size: 300px;
+     line-height: .37;
+     letter-spacing: -20px;
+     padding-left: 180px;
+     text-indent: -125px;
+
+     vertical-align: middle;
+}
+
 /******************************************
-/* CONTACT FORM
+/* HAMBURGER MENU
 /*******************************************/
+
+   
+   #menu {
+     z-index: 2;
+   }
+   
+   #menu-bar {
+     width: 45px;
+     height: 40px;
+     margin: 30px 0 0 17px;
+     cursor: pointer;
+   }
+   
+   .bar {
+     height: 5px;
+     width: 100%;
+     background-color: var(--main-highlight-color);
+     display: block;
+     border-radius: 5px;
+     transition: 0.3s ease;
+   }
+   
+   #bar1 {
+     transform: translateY(-4px);
+   }
+   
+   #bar3 {
+     transform: translateY(4px);
+   }
+   
+   .nav {
+     transition: 0.3s ease;
+     display: none;
+   }
+   
+   .nav ul {
+     padding: 0 22px;
+     margin: 0;
+   }
+   
+   .nav li {
+     list-style: none;
+     padding: 12px 0;
+   }
+   
+   .nav li a {
+     color: var(--main-font-color);
+     font-size: 20px;
+     text-decoration: none;
+   }
+   
+   .nav li a:hover {
+     font-weight: bold;
+   }
+   
+   .menu-bg, #menu {
+     
+     left: 0;
+     position: sticky;
+     top: 20px;
+   }
+   
+   .menu-bg {
+     z-index: 1;
+     width: 0;
+     height: 0;
+     margin: 30px 0 20px 20px;
+     background: radial-gradient(circle, var(--main-highlight-color), var(--main-highlight-color));
+     border-radius: 50%;
+     transition: 0.3s ease;
+   }
+   
+   .change {
+     display: block;
+   }
+   
+   .change .bar {
+     background-color: var(--main-font-color);
+   }
+   
+   .change #bar1 {
+     transform: translateY(4px) rotateZ(-45deg);
+   }
+   
+   .change #bar2 {
+     opacity: 0;
+   }
+   
+   .change #bar3 {
+     transform: translateY(-6px) rotateZ(45deg);
+   }
+   
+   .change-bg {
+     width: 320px;
+     height: 320px;
+     transform: translate(-41%, -95%);
+   }

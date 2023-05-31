@@ -2,22 +2,49 @@
 <html lang="en">
 	<head>
     	<meta charset="utf-8">
-    	<meta name="description" content="Justin Wested portfolio website">
-    	<meta name="keywords" content="one, two, three">
+    	<meta name="description" content="">
+    	<meta name="keywords" content="justin, wested, justin wested, Portfolio, frontend Developer, dungeon master, dungeons and dragons">
 
-		<title>Blank Template</title>
+		<title>Justin Wested Portfolio</title>
 
 		<!-- external CSS link -->
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400&family=Josefin+Slab:wght@600;700&display=swap" rel="stylesheet">
+
+		<script src="https://kit.fontawesome.com/21695ac8bb.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<header>
-			<h1>Justin Wested</h1>
-			<span>Frontend Developer</span>
-			<p>Hey hey! My name is Justin and I'm a D&D player and Frontend Developer located in Burbank, CA.</p>
+			<div id="menu">
+				<div id="menu-bar" onclick="menuOnClick()">
+				  <div id="bar1" class="bar"></div>
+				  <div id="bar2" class="bar"></div>
+				  <div id="bar3" class="bar"></div>
+				</div>
+				<nav class="nav" id="nav">
+				  <ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Blog</a></li>
+				  </ul>
+				</nav> 
+			  </div>
+			  
+			  <div class="menu-bg" id="menu-bg"></div>
 		</header>
 		<main>
+			<section class="hero">
+
+				<h1>justin<br>
+				wested</h1>
+				<span>Frontend Developer & Dungeon Master</span>
+				<p>Hey hey! My name is Justin and I'm a D&D player and Frontend Developer located in Burbank, CA.</p>
+			</section>
+
 			<article>
 				
 			</article>	
@@ -29,18 +56,6 @@
 			</article>
 		</main>
 		<footer>
-			<form class="contact-form">
-				<label for="name">Name</label>
-				<input type="text" id="name" name="name" required>
-			  
-				<label for="email">Email</label>
-				<input type="email" id="email" name="email" required>
-			  
-				<label for="message">Message</label>
-				<textarea id="message" name="message" rows="5" required></textarea>
-			  
-				<button type="submit">Submit</button>
-			  </form>
 
 
 			<script type="text/javascript" src="js/main.js"></script>
