@@ -4,6 +4,7 @@
     	<meta charset="utf-8">
     	<meta name="description" content="">
     	<meta name="keywords" content="justin, wested, justin wested, Portfolio, frontend Developer, dungeon master, dungeons and dragons">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>Justin Wested Portfolio</title>
 		<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
@@ -13,48 +14,234 @@
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=DotGothic16&family=Josefin+Sans:wght@200;300;400&family=Josefin+Slab:wght@600;700&family=Nabla&display=swap" rel="stylesheet"> 	</head>
+		<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=DotGothic16&family=Josefin+Sans:wght@200;300;400&family=Josefin+Slab:wght@600;700&family=Nabla&display=swap" rel="stylesheet"> 
+		<script src="https://kit.fontawesome.com/21695ac8bb.js" crossorigin="anonymous"></script>	
+	
+	</head>
 	<body>
-		<header>
-			<div id="menu">
-				<div id="menu-bar" onclick="menuOnClick()">
-				  <div id="bar1" class="bar"></div>
-				  <div id="bar2" class="bar"></div>
-				  <div id="bar3" class="bar"></div>
-				</div>
-				<nav class="nav" id="nav">
-				  <ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-					<li><a href="#">Blog</a></li>
-				  </ul>
-				</nav> 
-			  </div>
-			  
-			  <div class="menu-bg" id="menu-bg"></div>
-		</header>
 		<main>
-			<section class="hero">
 
-				<h2>justin<br>
-				wested</h2>
-				<h1>Frontend Developer & Dungeon Master</h1>
-				<span class="subtitle">Merging creative <strong class="world">world building</strong> with cutting-edge web development<br> for <strong class="three_d">spellbinding</strong> user experiences--<strong>one pixel</strong> at a time. </span>
+			<section class="top-nav">
+				<div class="logos">
+				  <a href="index.html"><img width="40" src="/images/helix.webp"></a>
+				  <a href="https://github.com/JustinWested"><i class="fa-brands fa-github" style="color: #EDF5E1;"></i></a>
+				  <a href="https://www.linkedin.com/in/justin-wested/"><i class="fa-brands fa-linkedin" style="color: #EDF5E1;"></i></a>
+				</div>
+				<input id="menu-toggle" type="checkbox" />
+				<label class='menu-button-container' for="menu-toggle">
+				<div class='menu-button'></div>
+			  </label>
+				<ul class="menu">
+				  <li><a href="#work-container">Projects</a></li>
+				  <li><a href="#about-container">About</a></li>
+				  <li><a href="#skills-container">Skills</a></li>
+				  <li><a href="#contact-container">Contact</a></li>
+				</ul>
 			</section>
 
-			<article>
-				
-			</article>	
-			<article>
-				
-			</article>
-			<article>
-				
-			</article>
+
+			<section class="hero-bg">
+				<section class="hero">
+					<h2 class="justin">justin</h2><br>
+					<h2 class="wested">wested</h2>
+					<h1>Frontend Developer & Dungeon Master</h1>
+					<span class="subtitle">Merging creative <strong class="world">world building</strong> with cutting-edge web development for <strong class="three_d">spellbinding</strong> user experiences--<strong>one pixel</strong> at a time. </span>
+					<aside>
+						<a href="#">Hire Me</a>
+					</aside>
+				</section>
+			</section>
+
+			<section id="work-container" class="work-container">
+				<section class="work-info">
+					<h3>Current Projects</h3>
+
+					<article class="blueberry-container">
+						<section class="work-text">
+							<h4>Ace Animation</h4>
+							<p>A website design for a new animation studio. They're getting a lot of buzz with their new short film and wanted a sleek, modern dozen to draw in traffic and future investors. I designed a professional look and am currently implementing it as a custom WordPress block theme. WordPress' new block themes can provide a lot of flexibility to the client so they're able to make edits and adjustments on their own in the future. Website is currently in developmenet and all images herein are either placeholder or mockups.</p>
+							<ul>
+								<li>PHP</li>
+								<li>CS</li>
+								<li>JSON</li>
+								<li>WordPress</li>
+								<li>WooCommerce</li>
+							</ul>
+							<a class="visit-button" href="http://www.aceanimationstudios.com/">Visit Site</a>
+							<a class="code-button"><i class="fa-solid fa-eye-low-vision"></i> Code Private</a>
+						</section>
+						<section class="work-image">
+							<a href="/images/Frame 10prototype_dark.webp" target="_blank">
+								<img src="/images/Frame 10prototype_dark.webp" >
+							</a>
+						</section>
+					</article>
+					<details>
+						<summary>README.md</summary>
+						<p><a name="readme-top"></a></p>
+
+						<!-- TABLE OF CONTENTS -->
+						<details>
+						  <summary>Table of Contents</summary>
+						  <ol>
+							<li>
+							  <a href="#about-the-project">About The Project</a>
+							  <ul>
+								<li><a href="#built-with">Built With</a></li>
+								<li><a href="#design-process">Design Process</a></li>
+							  </ul>
+							</li>
+							<li><a href="#contact">Contact</a></li>
+							<li><a href="#acknowledgments">Acknowledgments</a></li>
+						  </ol>
+						</details>
+						
+						
+						
+						<!-- ABOUT THE PROJECT -->
+						<h4 id="about-the-project">About The Project</h4>
+						<div>
+						  <a href="www.aceanimationstudios.com/">
+							<img src="/images/Frame 9prototype_colored.webp"  height="400">
+						  </a>
+						</div>
+						
+						<p>
+							<br>
+							A website design for a new animation studio. They're getting a lot of buzz with their new short film and wanted a sleek, modern dozen to draw in traffic and future investors. I designed a professional look and am currently implementing it as a custom WordPress block theme. WordPress' new block themes can provide a lot of flexibility to the client so they're able to make edits and adjustments on their own in the future.
+							<br><br>
+							Functionality would need to include a fully fleshed out WP compatible block theme so the client would be able to make many adjustments without coding. Client needs require an ability to add additional pages for future projects, ability to add new products to a WooCommerce store and have them populate to store pages and front page, ability to make adjustments to the home ppage to add current news easily, and not many hard-coded elements, while making sure the theme felt unique.
+						</p>
+						<p>(<a href="#readme-top">back to top</a>)</p>
+						
+						
+						
+						<h4 id="built-with">Built With</h4>
+						<ul>
+						<li><img src="https://img.shields.io/badge/CSS-purple?style=for-the-badge&logo=CSS3" alt="CSS"></li>
+						<li><img src="https://img.shields.io/badge/PHP-yellow?style=for-the-badge&logo=php" alt="HTML"></li>
+						<li><img src="https://img.shields.io/badge/json-black?style=for-the-badge&logo=json" alt="JS"></li>
+						<li><img src="https://img.shields.io/badge/WordPress-red?style=for-the-badge&logo=wordpress" alt="WP"></li>
+						<li><img src="https://img.shields.io/badge/Woocommerce-white?style=for-the-badge&logo=woo" alt="WooCommerce"></li>
+						</ul>
+						<p>(<a href="#readme-top">back to top</a>)</p>
+						
+						
+						<h4 id="design-process">Design Process</h4>
+						<div>
+							<a href="/images/Frame 11protohero1.webp">
+								<img height="200" src="/images/Frame 11protohero1.webp" alt="">
+							</a> 
+							<a href="/images/Frame 12proto_hero2.webp">
+								<img height="200" src="/images/Frame 12proto_hero2.webp"> 
+							</a>
+							<a href="/images/Frame 9prototype_colored.webp">
+								<img src="/images/Frame 9prototype_colored.webp"  height="200">
+							</a>
+						</div>
+						  <p><br>
+						  The was fairly straightforward--create a classic looking website that exuded a playful, childlike energy while still having a professional and classic look. After getting some color and shape direction from the clients design team I went through a few mockups. We went back and forth between wildly colorful examples and other dark "modern" looks but eventually settled on a classic white. The client wanted to bring in some color though so we used their branding to give shape and definition to certain sections of the site.</p>
+						<!-- CONTACT -->
+						<h4 id="contact">Contact</h4>
+						<p>Justin Wested - <a href="https://www.linkedin.com/in/justin-wested/">LinkedIn</a> - justwested@gmail.com</p>
+						<p>(<a href="#readme-top">back to top</a>)</p>
+						
+						
+						
+						<!-- ACKNOWLEDGMENTS -->
+						<h4 id="acknowledgments">Acknowledgments</h4>
+						<ul>
+						<li><a href="https://fontawesome.com">Font Awesome</a></li>
+						<li><a href="https://www.instagram.com/ace_animation_studios/">Ace Animation</a></li>
+						</ul>
+						<p>(<a href="#readme-top">back to top</a>)</p>
+						
+					</details>
+
+					<article class="april-container">
+						<section class="work-text">
+							<h4>filler</h4>
+							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero sunt velit labore vitae nam laboriosam, minus in porro doloribus deserunt?</p>
+							<ul>
+								<li>filler</li>
+								<li>filler</li>
+								<li>filler</li>
+							</ul>
+							<a class="visit-button" href=""></a>
+							<a class="code-button" href=""><i class="fa-brands fa-github"></i></a>
+						</section>
+						<section class="work-image">
+							<img src="">
+						</section>
+					</article>
+					<details>
+						<summary></summary>
+						<p></p>
+					</details>
+
+					<article class="visionrey-container">
+						<section class="work-text">
+							<h4></h4>
+							<p></p>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+							<a class="visit-button" href=""></a>
+							<a class="code-button" href=""><i class="fa-brands fa-github"></i></a>
+						</section>
+						<section class="work-image">
+							<img src="">
+						</section>
+					</article>
+					<details>
+						<summary></summary>
+						<p></p>
+					</details>
+
+					<article class="kickball-container">
+						<section class="work-text">
+							<h4></h4>
+							<p></p>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+							<a class="visit-button" href=""></a>
+							<a class="code-button" href=""><i class="fa-brands fa-github"></i></a>
+						</section>
+						<section class="work-image">
+							<img src="">
+						</section>
+					</article>
+					<details>
+						<summary></summary>
+						<p></p>
+					</details>
+				</section>
+			</section>	
+
+			<section id="about-container" class="about-container">
+					<section class="about-info">
+
+					</section>
+					<section id="skills-container" class="skills-container">
+
+					</section>
+			</section>
+
+
+
 		</main>
 		<footer>
+			<section id="contact-container" class="contact-container">
+				<section class="contact-info">
 
+					
+				</section>
+			</section>
 
 			<script type="text/javascript" src="js/main.js"></script>
 		</footer>
