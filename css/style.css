@@ -185,9 +185,8 @@ h4 {
   font-size: clamp(1.6rem, 3vw, 3.2rem);
   margin: 20px 0;
 }
-
-.blueberry-container,
-.visionrey-container {
+.kickball-container,
+.blueberry-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -195,8 +194,9 @@ h4 {
   margin-top: 80px !important;
 }
 
+
 .april-container,
-.kickball-container {
+.visionrey-container {
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap-reverse;
@@ -214,6 +214,7 @@ h4 {
 .work-image {
   height: 400px;
   overflow-y: scroll;
+  border-radius: 5px;
 }
 
 .work-image img {
@@ -221,6 +222,14 @@ h4 {
   max-width: 100%;
   height: auto; 
   margin: 0 auto;
+}
+
+img {
+  border-radius: 5px;
+}
+
+video {
+  width: 75%;
 }
 
 details {
@@ -261,6 +270,142 @@ details {
   box-shadow: 0px 0px 6px var(--main-bg-color);
 }
 
+.about-container {
+  background-color: var(--main-bg-color);
+  padding: 30px 0;
+}
+
+.about-info {
+  display: flex;
+  flex-direction: row;
+  gap: 40px
+}
+
+.about-container h3 {
+  color: var(--main-font-color);
+  text-shadow: 3px 2px 0px var(--main-highlight-color);
+  font-weight: 900;
+  font-size: 3.5rem;
+  text-align: center;
+  margin: 20px;
+}
+
+.about-info img {
+  width: 400px;
+  height: fit-content;
+  border-radius: 60px;
+}
+
+.about-info article {
+  color: var(--main-highlight-color);
+}
+
+.lead {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.skills-container span {
+  font-weight: 900;
+  font-size: 1.3rem;
+}
+
+h5 {
+  color: var(--main-highlight-color);
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.skills-container article {
+  margin: 20px;
+  padding: 20px 40px;
+  background-color: var(--main-font-color);
+  color: var(--bg-shadow-color);
+  border-radius: 10px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-container {
+  background-color: var(--main-highlight-color);
+  height: 600px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.contact-container h2 {
+  font-size: 3rem;
+  margin: 10px;
+}
+
+.contact-container span {
+  font-size: 1.5rem;
+  margin-bottom: 50px;
+  color: var(--main-bg-color);
+}
+
+footer section section button {
+  background-color: var(--bg-highlight-color)!important;
+  border-radius: 5px !important;
+  padding: 10px 0 !important;
+  width: 290px !important;
+  color: var(--main-highlight-color) !important;
+  font-size: 1.3rem !important;
+  transition: all ease-in-out .3s !important;
+}
+
+.linked,
+.email {
+  background-color: var(--main-bg-color);
+  border-radius: 5px;
+  padding: 10px;
+  width: 290px;
+  margin-top: 30px;
+  color: var(--main-highlight-color);
+  text-align: center;
+  font-size: 1.3rem;
+  transition: all ease-in-out .3s;
+
+}
+
+.email{
+  background-color: var(--bg-shadow-color);
+}
+
+footer section section button:hover,
+.linked:hover,
+.email:hover {
+  background-color: var(--main-font-color) !important;
+  box-shadow: 0px 0px 20px var(--main-bg-color), 0px 0px 5px var(--main-bg-color) !important;
+}
+
+footer aside {
+  text-align: right;
+  padding: 20px;
+  font-size: 25px;
+}
+
+footer aside a {
+  padding: 0 10px;
+}
+
+footer {
+  background-color: var(--main-highlight-color);
+}
+
 /******************************************
 /* HAMBURGER MENU
 /*******************************************/
@@ -268,7 +413,7 @@ details {
    
 .top-nav {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1100px;
   position: sticky;
   top: 30px;
   display: flex;
@@ -426,6 +571,10 @@ details {
     width: 100%;
   }
 
+  video {
+    width: 100%;
+  }
+
   details {
     padding: 10px;
     margin: 20px 0;
@@ -437,5 +586,26 @@ details {
   .contact-info {
     padding: 0 5px;
   }
+
+  .about-info {
+    flex-direction: column;
+  }
+
+  .about-info img,
+  .about-info article{
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .about-info img {
+    width: auto;
+    height: 300px;
+  }
+
+  .skills-container {
+    flex-direction: column;
+  }
+
+
 
 }
