@@ -93,7 +93,7 @@ header {
 
 .hero h1 {
      padding-top: 30px;
-     font-size: clamp(1rem, 9vw, 3rem);
+     font-size: clamp(.8rem, 7vw, 3rem);
      font-weight: 700;
      margin: 10px 0;
 
@@ -130,22 +130,23 @@ header {
   display: block;
   padding: 20px 0;
   margin-top: 20px;
+  height: 70px;
 }
 
-.hero a {
+.hero button {
   text-decoration: none;
   color: var(--main-font-color);
   background-color: var(--main-highlight-color);
   border: 2px solid var(--main-font-color);
   border-radius: 6px;
-  margin-top: 20px;
   padding: 10px 40px;
   width: fit-content;
   font-size: clamp(1rem, 5vw, 1.8rem);
   transition: ease-in-out all .3s;
+  cursor: pointer;
 }
 
-.hero a:hover {
+.hero button:hover {
   color: var(--main-highlight-color);
   background-color: var(--main-font-color);
   padding: 15px 65px;
