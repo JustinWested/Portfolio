@@ -190,7 +190,7 @@ h4 {
 .blueberry-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   gap: 20px;
   margin-top: 80px !important;
 }
@@ -209,6 +209,7 @@ h4 {
 
 .work-text,
 .work-image {
+  margin: 0 auto;
   width: 48%;
 }
 
@@ -573,9 +574,15 @@ footer {
 
 
 
-  .work-text,
+  .work-text {
+    width: 90%;
+  }
+
+  
   .work-image {
-    width: 100%;
+    width: 60%;
+    height: 360px;
+    margin: 0 auto;
   }
 
   video {
