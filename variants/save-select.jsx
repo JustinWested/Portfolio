@@ -230,7 +230,7 @@ function SaveSelectVariant() {
           <SSSaveSlot
             idx={1}
             label="WEB DEVELOPMENT"
-            role="Frontend Engineer · Builder"
+            role="Software Engineer · Builder"
             level="LVL 24"
             playtime="3,200 h"
             lastSave="2026.04.22"

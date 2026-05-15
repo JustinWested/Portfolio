@@ -38,9 +38,15 @@ function SectionContact() {
   const save = SAVES.find(s => s.id === 'contact');
   const [name, setName] = React.useState('');
   const [msg, setMsg] = React.useState('');
+  const isMobile = useIsMobile();
   return (
     <SectionShell save={save}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 1fr', gap: 40, alignItems: 'start' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1.05fr 1fr',
+        gap: isMobile ? 24 : 40,
+        alignItems: 'start',
+      }}>
         <div>
           <PanelTitle kicker="CONTACT · #contact" code="05·CHANNELS">
             Open the channel. <span style={{ color: PALETTE.mint }}>Let's co-op.</span>
@@ -136,8 +142,9 @@ function SectionContact() {
 
       {/* Footer block */}
       <div style={{
-        marginTop: 50, paddingTop: 24, borderTop: `1px solid ${PALETTE.borderMd}`,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 28,
+        marginTop: isMobile ? 36 : 50, paddingTop: 24, borderTop: `1px solid ${PALETTE.borderMd}`,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        gap: isMobile ? 14 : 28, flexWrap: 'wrap',
       }}>
         <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: PALETTE.textLo, letterSpacing: 1.5 }}>
           ◆ END OF FILE · justinwested.dev

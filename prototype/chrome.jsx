@@ -84,6 +84,19 @@ function SocialLinks({ size = 24, tone = 'default' }) {
 }
 
 function StickyTabBar({ active, onSelect, visible }) {
+  const isMobile = useIsMobile();
+  const tabRowRef = React.useRef(null);
+
+  // On mobile, scroll the active tab into view so it stays visible as the
+  // user scrolls through sections.
+  React.useEffect(() => {
+    if (!isMobile || !tabRowRef.current) return;
+    const el = tabRowRef.current.querySelector(`[data-tab="${active}"]`);
+    if (el && el.scrollIntoView) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, [active, isMobile]);
+
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
@@ -96,31 +109,45 @@ function StickyTabBar({ active, onSelect, visible }) {
     }}>
       <div style={{
         maxWidth: 1440, margin: '0 auto',
-        padding: '10px 56px',
-        display: 'flex', alignItems: 'center', gap: 18,
+        padding: isMobile ? '8px 12px' : '10px 56px',
+        display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 18,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
           <img src="assets/helix.webp" alt=""
-            style={{ width: 22, height: 22, objectFit: 'contain' }}
+            style={{ width: isMobile ? 20 : 22, height: isMobile ? 20 : 22, objectFit: 'contain' }}
           />
-          <span style={{
-            fontFamily: FONT_MONO, fontSize: 10, letterSpacing: 3, color: PALETTE.mint,
-          }}>
-            JW//
-          </span>
+          {!isMobile && (
+            <span style={{
+              fontFamily: FONT_MONO, fontSize: 10, letterSpacing: 3, color: PALETTE.mint,
+            }}>
+              JW//
+            </span>
+          )}
         </div>
-        <div style={{ width: 1, height: 18, background: PALETTE.borderMd }} />
+        {!isMobile && <div style={{ width: 1, height: 18, background: PALETTE.borderMd }} />}
 
-        {/* Tabs */}
-        <div style={{ display: 'flex', gap: 4, flex: 1, overflow: 'hidden' }}>
+        {/* Tabs — horizontally scrollable on mobile so all 6 stay reachable */}
+        <div
+          ref={tabRowRef}
+          style={{
+            display: 'flex', gap: 4, flex: 1,
+            overflowX: isMobile ? 'auto' : 'hidden',
+            overflowY: 'hidden',
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
+          }}
+        >
           {SAVES.map(s => {
             const isActive = active === s.id;
             const color = isActive ? statusToColor(s.statusColor) : PALETTE.textMid;
             return (
-              <a key={s.id} href={s.anchor} onClick={(e) => { e.preventDefault(); onSelect(s.id); }}
+              <a key={s.id} href={s.anchor} data-tab={s.id}
+                onClick={(e) => { e.preventDefault(); onSelect(s.id); }}
                 style={{
-                  textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8,
-                  padding: '7px 12px', cursor: 'pointer',
+                  textDecoration: 'none', display: 'flex', alignItems: 'center',
+                  gap: isMobile ? 5 : 8,
+                  padding: isMobile ? '6px 9px' : '7px 12px',
+                  cursor: 'pointer', flexShrink: 0,
                   background: isActive ? 'rgba(126,220,200,0.10)' : 'transparent',
                   border: `1px solid ${isActive ? PALETTE.borderHi : 'transparent'}`,
                   transition: 'background 0.15s, border 0.15s',
@@ -129,31 +156,40 @@ function StickyTabBar({ active, onSelect, visible }) {
                 <span style={{
                   fontFamily: FONT_MONO, fontSize: 10, letterSpacing: 1.2, color: PALETTE.textLo,
                 }}>{s.code}</span>
-                <span style={{
-                  fontFamily: FONT_DISPLAY, fontSize: 12, fontWeight: 600, color, letterSpacing: 0.3,
-                }}>{s.name}</span>
+                {/* On mobile, only the active tab shows its name to save horizontal room */}
+                {(!isMobile || isActive) && (
+                  <span style={{
+                    fontFamily: FONT_DISPLAY,
+                    fontSize: isMobile ? 11 : 12,
+                    fontWeight: 600, color, letterSpacing: 0.3,
+                    whiteSpace: 'nowrap',
+                  }}>{s.name}</span>
+                )}
                 {isActive && <PulseDot size={5} color={color} />}
               </a>
             );
           })}
         </div>
 
-        {/* Right stack — socials on top, invite below — keeps the bar narrow */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'stretch', flexShrink: 0 }}>
-          <SocialLinks size={20} />
-          <a href="#contact" onClick={(e) => { e.preventDefault(); onSelect('contact'); }}
-            style={{
-              textDecoration: 'none',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              padding: '4px 10px', border: `1px solid ${PALETTE.mint}`,
-              background: 'rgba(126,220,200,0.08)',
-              fontFamily: FONT_MONO, fontSize: 10, letterSpacing: 1.5, color: PALETTE.mint,
-              cursor: 'pointer',
-            }}>
-            <PulseDot size={5} />
-            INVITE_TO_GAME ↗
-          </a>
-        </div>
+        {/* Right stack — desktop only. On mobile the bar stays single-row, and
+            socials/invite are reachable from the hero, footer, and contact section. */}
+        {!isMobile && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'stretch', flexShrink: 0 }}>
+            <SocialLinks size={20} />
+            <a href="#contact" onClick={(e) => { e.preventDefault(); onSelect('contact'); }}
+              style={{
+                textDecoration: 'none',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                padding: '4px 10px', border: `1px solid ${PALETTE.mint}`,
+                background: 'rgba(126,220,200,0.08)',
+                fontFamily: FONT_MONO, fontSize: 10, letterSpacing: 1.5, color: PALETTE.mint,
+                cursor: 'pointer',
+              }}>
+              <PulseDot size={5} />
+              INVITE_TO_GAME ↗
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -161,6 +197,7 @@ function StickyTabBar({ active, onSelect, visible }) {
 
 function PersistentStatusBar() {
   const [time, setTime] = React.useState('');
+  const isMobile = useIsMobile();
   React.useEffect(() => {
     const update = () => {
       const d = new Date();
@@ -173,28 +210,31 @@ function PersistentStatusBar() {
     const i = setInterval(update, 1000);
     return () => clearInterval(i);
   }, []);
+  const sep = <span style={{ color: PALETTE.borderMd }}>│</span>;
   return (
     <div style={{
       position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50,
       background: PALETTE.bgDeep,
       borderTop: `1px solid ${PALETTE.borderMd}`,
-      padding: '8px 56px',
-      display: 'flex', alignItems: 'center', gap: 22,
-      fontFamily: FONT_MONO, fontSize: 10, letterSpacing: 1.4, color: PALETTE.textMid,
+      padding: isMobile ? '6px 12px' : '8px 56px',
+      display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 22,
+      fontFamily: FONT_MONO, fontSize: isMobile ? 9 : 10, letterSpacing: 1.4, color: PALETTE.textMid,
     }}>
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: PALETTE.mint }}>
         <PulseDot size={5} /> ONLINE
       </span>
-      <span style={{ color: PALETTE.borderMd }}>│</span>
-      <span>REGION: LOS ANGELES</span>
-      <span style={{ color: PALETTE.borderMd }}>│</span>
-      <span>SLOT: <span style={{ color: PALETTE.textHi }}>JustinWested_</span></span>
+      {!isMobile && <>
+        {sep}
+        <span>REGION: LOS ANGELES</span>
+        {sep}
+        <span>SLOT: <span style={{ color: PALETTE.textHi }}>JustinWested_</span></span>
+      </>}
       <span style={{ flex: 1 }} />
-      <SocialLinks size={20} tone="subtle" />
-      <span style={{ color: PALETTE.borderMd }}>│</span>
-      <span style={{ color: PALETTE.textLo }}>{time} LOCAL</span>
-      <span style={{ color: PALETTE.borderMd }}>│</span>
-      <span style={{ color: PALETTE.mint }}>STATUS: OPEN_TO_OPPORTUNITIES</span>
+      {!isMobile && <SocialLinks size={20} tone="subtle" />}
+      {!isMobile && sep}
+      <span style={{ color: PALETTE.textLo }}>{time}{!isMobile && ' LOCAL'}</span>
+      {!isMobile && sep}
+      <span style={{ color: PALETTE.mint }}>{isMobile ? 'OPEN' : 'STATUS: OPEN_TO_OPPORTUNITIES'}</span>
     </div>
   );
 }

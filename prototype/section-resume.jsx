@@ -55,10 +55,13 @@ const TIMELINE = [
 ];
 
 function TimelineEntry({ e, idx, last }) {
+  const isMobile = useIsMobile();
   return (
     <div style={{
-      position: 'relative', display: 'grid', gridTemplateColumns: '160px 1fr', gap: 28,
-      paddingLeft: 18, paddingBottom: last ? 0 : 28,
+      position: 'relative', display: 'grid',
+      gridTemplateColumns: isMobile ? '1fr' : '160px 1fr',
+      gap: isMobile ? 12 : 28,
+      paddingLeft: isMobile ? 24 : 18, paddingBottom: last ? 0 : 28,
     }}>
       {/* Vertical rail */}
       <div style={{
@@ -75,20 +78,24 @@ function TimelineEntry({ e, idx, last }) {
         {idx === 0 && <div style={{ position: 'absolute', inset: 2, background: PALETTE.mint }} />}
       </div>
 
-      <div style={{ paddingLeft: 22 }}>
+      <div style={{
+        paddingLeft: isMobile ? 0 : 22,
+        display: isMobile ? 'flex' : 'block',
+        flexWrap: 'wrap', alignItems: 'center', gap: 10,
+      }}>
         <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: idx === 0 ? PALETTE.mint : PALETTE.textLo, letterSpacing: 1.5, fontWeight: 600 }}>
           {e.span}
         </div>
         <div style={{
           fontFamily: FONT_MONO, fontSize: 9, letterSpacing: 1.5, color: e.badgeColor,
-          marginTop: 8, padding: '3px 8px', border: `1px solid ${e.badgeColor}`,
+          marginTop: isMobile ? 0 : 8, padding: '3px 8px', border: `1px solid ${e.badgeColor}`,
           display: 'inline-block',
         }}>{e.badge}</div>
       </div>
 
       <div style={{
         border: `1px solid ${PALETTE.borderMd}`, background: PALETTE.surface,
-        padding: '18px 22px',
+        padding: isMobile ? '14px 16px' : '18px 22px',
       }}>
         <div style={{ fontFamily: FONT_DISPLAY, fontSize: 22, fontWeight: 700, color: PALETTE.textHi, letterSpacing: -0.3, lineHeight: 1.1 }}>
           {e.co}
@@ -113,9 +120,15 @@ function TimelineEntry({ e, idx, last }) {
 
 function SectionResume() {
   const save = SAVES.find(s => s.id === 'resume');
+  const isMobile = useIsMobile();
   return (
     <SectionShell save={save}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 36, alignItems: 'start' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 340px',
+        gap: isMobile ? 24 : 36,
+        alignItems: 'start',
+      }}>
         <div>
           <PanelTitle kicker="QUEST LOG · #resume" code="04·HISTORY">
             QA depth & a <span style={{ color: PALETTE.mint }}>gameplay engineering pivot.</span>
@@ -135,7 +148,9 @@ function SectionResume() {
               EDUCATION · TRAINING
             </div>
             <div style={{
-              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14,
+              display: 'grid',
+              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+              gap: 14,
             }}>
               {[
                 ['Western Governors University', 'B.S. Computer Science', 'EXPECTED 2027'],
@@ -153,8 +168,13 @@ function SectionResume() {
           </div>
         </div>
 
-        {/* RIGHT — export card + skill blocks */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14, position: 'sticky', top: 80 }}>
+        {/* RIGHT — export card + skill blocks. Sticky on desktop only; on
+            mobile it sits inline below the timeline. */}
+        <div style={{
+          display: 'flex', flexDirection: 'column', gap: 14,
+          position: isMobile ? 'static' : 'sticky',
+          top: 80,
+        }}>
           <div style={{
             border: `1px solid ${PALETTE.mint}`,
             background: 'linear-gradient(180deg, rgba(126,220,200,0.10), rgba(126,220,200,0.03))',

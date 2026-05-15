@@ -1,6 +1,6 @@
 // APP — wires hero + sections + sticky chrome.
-// Tracks active section via IntersectionObserver and smooth-scrolls
-// when a save slot or tab is clicked.
+// Tracks active section via a scroll listener (deterministic: always
+// picks one section) and smooth-scrolls when a save slot or tab is clicked.
 
 function App() {
   const [active, setActive] = React.useState('home');
@@ -8,24 +8,54 @@ function App() {
 
   React.useEffect(() => {
     const sectionIds = ['home', ...SAVES.map(s => s.id)];
-    const els = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+    // Threshold line ~ where the sticky bar sits. A section becomes active
+    // once its top edge crosses above this line.
+    const ACTIVATION_OFFSET = 140;
+    // Show the sticky bar as soon as the user starts scrolling.
+    const STICKY_OFFSET = 60;
 
-    const io = new IntersectionObserver((entries) => {
-      // Pick the entry closest to top that's intersecting.
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-      if (visible.length) {
-        setActive(visible[0].target.id);
-        setPastHero(visible[0].target.id !== 'home');
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+      setPastHero(y > STICKY_OFFSET);
+
+      // Bottom-of-page safety: if we're within a screen of the bottom,
+      // lock to the last section so the final entry can highlight even
+      // if it's shorter than the activation offset.
+      const nearBottom = y + window.innerHeight >= document.documentElement.scrollHeight - 4;
+      if (nearBottom) {
+        setActive(sectionIds[sectionIds.length - 1]);
+        return;
       }
-    }, {
-      rootMargin: '-30% 0px -55% 0px',
-      threshold: [0, 0.1, 0.25, 0.5],
-    });
 
-    els.forEach(el => io.observe(el));
-    return () => io.disconnect();
+      let current = sectionIds[0];
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top;
+        if (top - ACTIVATION_OFFSET <= 0) {
+          current = id;
+        } else {
+          break;
+        }
+      }
+      setActive(current);
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   const handleSelect = React.useCallback((id) => {
