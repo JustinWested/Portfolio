@@ -217,11 +217,11 @@ function PersistentStatusBar() {
       background: PALETTE.bgDeep,
       borderTop: `1px solid ${PALETTE.borderMd}`,
       padding: isMobile ? '6px 12px' : '8px 56px',
-      display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 22,
+      display: 'flex', alignItems: 'center', gap: isMobile ? 8 : 22,
       fontFamily: FONT_MONO, fontSize: isMobile ? 9 : 10, letterSpacing: 1.4, color: PALETTE.textMid,
     }}>
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: PALETTE.mint }}>
-        <PulseDot size={5} /> ONLINE
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: PALETTE.mint }}>
+        <PulseDot size={5} />{!isMobile && ' ONLINE'}
       </span>
       {!isMobile && <>
         {sep}
@@ -229,14 +229,165 @@ function PersistentStatusBar() {
         {sep}
         <span>SLOT: <span style={{ color: PALETTE.textHi }}>JustinWested_</span></span>
       </>}
+      {/* Socials — visible on mobile (smaller) and desktop (subtle) */}
+      <SocialLinks size={isMobile ? 22 : 20} tone="subtle" />
       <span style={{ flex: 1 }} />
-      {!isMobile && <SocialLinks size={20} tone="subtle" />}
       {!isMobile && sep}
       <span style={{ color: PALETTE.textLo }}>{time}{!isMobile && ' LOCAL'}</span>
-      {!isMobile && sep}
-      <span style={{ color: PALETTE.mint }}>{isMobile ? 'OPEN' : 'STATUS: OPEN_TO_OPPORTUNITIES'}</span>
+      {!isMobile && <>
+        {sep}
+        <span style={{ color: PALETTE.mint }}>STATUS: OPEN_TO_OPPORTUNITIES</span>
+      </>}
     </div>
   );
 }
 
-Object.assign(window, { StickyTabBar, PersistentStatusBar, SocialLinks, FONT_DISPLAY, FONT_MONO, FONT_PIXEL });
+// WINNOW PROMPT — small sticky "side quest" button above the status bar.
+// Clicking opens a modal that pitches Winnow (justin's movie ranking app)
+// in the same save-screen visual language as the rest of the site.
+function WinnowPrompt() {
+  const [open, setOpen] = React.useState(false);
+  const isMobile = useIsMobile();
+
+  // Esc to close + lock body scroll while open
+  React.useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        aria-label="Open Winnow side quest"
+        style={{
+          position: 'fixed',
+          // Sit just above the persistent status bar (~30px tall on mobile, ~34px on desktop).
+          bottom: isMobile ? 38 : 46,
+          right: isMobile ? 12 : 24,
+          zIndex: 55,
+          padding: isMobile ? '7px 11px' : '9px 14px',
+          background: 'rgba(8,19,32,0.92)',
+          border: `1px solid ${PALETTE.mint}`,
+          color: PALETTE.mint,
+          fontFamily: FONT_MONO,
+          fontSize: isMobile ? 10 : 11,
+          letterSpacing: 1.8, fontWeight: 700,
+          cursor: 'pointer',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          display: 'flex', alignItems: 'center', gap: 8,
+          boxShadow: '0 0 18px rgba(126,220,200,0.22)',
+          animation: 'slot-glow 3.4s ease-in-out infinite',
+        }}
+      >
+        <PulseDot size={5} />
+        {isMobile ? 'WINNOW' : 'DISCOVER WINNOW'}
+      </button>
+
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="winnow-prompt-title"
+          style={{
+            position: 'fixed', inset: 0, zIndex: 100,
+            background: 'rgba(8,19,32,0.78)',
+            backdropFilter: 'blur(6px)',
+            WebkitBackdropFilter: 'blur(6px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: 16,
+            animation: 'fade-up 0.22s ease-out both',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'relative',
+              maxWidth: 380, width: '100%',
+              padding: '26px 24px 22px',
+              background: 'linear-gradient(180deg, rgba(126,220,200,0.08), rgba(126,220,200,0.02)), ' + PALETTE.bg,
+              border: `1px solid ${PALETTE.mint}`,
+              boxShadow: '0 10px 60px rgba(126,220,200,0.25), 0 4px 30px rgba(0,0,0,0.5)',
+            }}
+          >
+            <CornerBrackets color={PALETTE.mint} size={14} thickness={1.5} inset={8} />
+
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Close"
+              style={{
+                position: 'absolute', top: 6, right: 8,
+                width: 30, height: 30, padding: 0,
+                background: 'transparent', border: 'none', cursor: 'pointer',
+                color: PALETTE.textMid,
+                fontFamily: FONT_MONO, fontSize: 20, lineHeight: 1,
+              }}
+            >×</button>
+
+            <div style={{
+              fontFamily: FONT_MONO, fontSize: 10, letterSpacing: 3,
+              color: PALETTE.mint, marginBottom: 10,
+              display: 'flex', alignItems: 'center', gap: 8,
+            }}>
+              <PulseDot size={5} /> BONUS LEVEL
+            </div>
+
+            <div id="winnow-prompt-title" style={{
+              fontFamily: FONT_DISPLAY, fontSize: 26, fontWeight: 700,
+              color: PALETTE.textHi, letterSpacing: -0.4, lineHeight: 1.05,
+              marginBottom: 10,
+            }}>
+              Like movies?
+            </div>
+
+            <p style={{
+              fontFamily: FONT_DISPLAY, fontSize: 15, lineHeight: 1.55,
+              color: PALETTE.textMid, margin: '0 0 18px',
+            }}>
+              Try <span style={{ color: PALETTE.mint, fontWeight: 600 }}>Winnow</span>{' '}
+              — my movie ranking app. Rank films against each other instead
+              of giving them stars. (Star ratings are how you avoid having
+              an opinion.)
+            </p>
+
+            <a
+              href="https://www.winnowlist.com"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setOpen(false)}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                gap: 10, padding: '12px 16px',
+                background: PALETTE.mint, color: PALETTE.bg,
+                textDecoration: 'none',
+                fontFamily: FONT_MONO, fontSize: 12, fontWeight: 700,
+                letterSpacing: 2.5,
+                border: `1px solid ${PALETTE.mint}`,
+              }}
+            >
+              ▶ OPEN WINNOWLIST.COM ↗
+            </a>
+
+            <div style={{
+              marginTop: 12, fontFamily: FONT_MONO, fontSize: 9,
+              color: PALETTE.textLo, letterSpacing: 1.4, textAlign: 'center',
+            }}>
+              ◆ ALSO BY JUSTIN · winnowlist.com
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+Object.assign(window, { StickyTabBar, PersistentStatusBar, WinnowPrompt, SocialLinks, FONT_DISPLAY, FONT_MONO, FONT_PIXEL });

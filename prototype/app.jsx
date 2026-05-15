@@ -76,7 +76,7 @@ function App() {
   }, [handleSelect]);
 
   return (
-    <div style={{ paddingBottom: 40 /* room for fixed status bar */ }}>
+    <div style={{ paddingBottom: 90 /* room for fixed status bar + Winnow prompt */ }}>
       <StickyTabBar active={active} onSelect={handleSelect} visible={pastHero} />
 
       <Hero onSelect={handleSelect} />
@@ -87,6 +87,7 @@ function App() {
       <SectionResume />
       <SectionContact />
 
+      <WinnowPrompt />
       <PersistentStatusBar />
     </div>
   );
