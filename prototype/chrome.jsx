@@ -338,7 +338,7 @@ function WinnowPrompt() {
               color: PALETTE.mint, marginBottom: 10,
               display: 'flex', alignItems: 'center', gap: 8,
             }}>
-              <PulseDot size={5} /> SIDE QUEST UNLOCKED
+              <PulseDot size={5} /> BONUS LEVEL
             </div>
 
             <div id="winnow-prompt-title" style={{
