@@ -1,0 +1,71 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="7" r="0.6" fill="rgba(126,220,200,0.18)"></circle>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(126,220,200,0.18)"></stop>
+      <stop offset="100%" stop-color="rgba(126,220,200,0)"></stop>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="200" fill="#081320"></rect>
+  <rect width="320" height="200" fill="url(#dots)"></rect>
+  <rect width="320" height="200" fill="url(#glow)"></rect>
+
+  
+  <g stroke="rgba(126,220,200,0.35)" stroke-width="1.2" fill="none" stroke-linecap="round">
+    <path d="M40,60 L110,50"></path>
+    <path d="M40,60 L110,100"></path>
+    <path d="M40,100 L110,100"></path>
+    <path d="M40,140 L110,150"></path>
+    <path d="M40,140 L110,100"></path>
+    <path d="M110,50 L180,40"></path>
+    <path d="M110,50 L180,100"></path>
+    <path d="M110,100 L180,100"></path>
+    <path d="M110,150 L180,160"></path>
+    <path d="M110,150 L180,100"></path>
+    <path d="M180,40 L250,60"></path>
+    <path d="M180,100 L250,100"></path>
+    <path d="M180,100 L250,60"></path>
+    <path d="M180,100 L250,140"></path>
+    <path d="M180,160 L250,140"></path>
+  </g>
+
+  
+  <g fill="none" stroke="rgba(126,220,200,0.25)" stroke-width="1.2">
+    <rect x="244" y="54" width="12" height="12" transform="rotate(45 250 60)"></rect>
+    <rect x="244" y="134" width="12" height="12" transform="rotate(45 250 140)"></rect>
+  </g>
+
+  
+  <g fill="none" stroke="#7eddc4" stroke-width="1.4">
+    <rect x="104" y="44" width="12" height="12" transform="rotate(45 110 50)"></rect>
+    <rect x="104" y="144" width="12" height="12" transform="rotate(45 110 150)"></rect>
+    <rect x="174" y="34" width="12" height="12" transform="rotate(45 180 40)"></rect>
+    <rect x="174" y="154" width="12" height="12" transform="rotate(45 180 160)"></rect>
+  </g>
+
+  
+  <g fill="#7eddc4">
+    <rect x="34" y="54" width="12" height="12" transform="rotate(45 40 60)"></rect>
+    <rect x="34" y="94" width="12" height="12" transform="rotate(45 40 100)"></rect>
+    <rect x="34" y="134" width="12" height="12" transform="rotate(45 40 140)"></rect>
+    <rect x="104" y="94" width="12" height="12" transform="rotate(45 110 100)"></rect>
+    <rect x="174" y="94" width="12" height="12" transform="rotate(45 180 100)"></rect>
+    <rect x="244" y="94" width="12" height="12" transform="rotate(45 250 100)"></rect>
+  </g>
+
+  
+  <circle cx="250" cy="100" r="13" fill="none" stroke="#7eddc4" stroke-width="1" stroke-dasharray="2 3" opacity="0.7"></circle>
+
+  
+  <g stroke="rgba(126,220,200,0.55)" stroke-width="1.4" fill="none">
+    <polyline points="10,18 10,10 18,10"></polyline>
+    <polyline points="302,10 310,10 310,18"></polyline>
+    <polyline points="10,182 10,190 18,190"></polyline>
+    <polyline points="302,190 310,190 310,182"></polyline>
+  </g>
+
+  
+  <text x="160" y="186" fill="#5a7088" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" text-anchor="middle">◆ SKILL TREE</text>
+</svg>
