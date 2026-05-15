@@ -135,9 +135,15 @@ function GameCard({ p, idx }) {
 
 function SectionGames() {
   const save = SAVES.find(s => s.id === 'games');
+  const isMobile = useIsMobile();
   return (
     <SectionShell save={save}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 36, alignItems: 'start' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 360px',
+        gap: isMobile ? 20 : 36,
+        alignItems: 'start',
+      }}>
         <div>
           <PanelTitle kicker="GAMES · #games" code="02·INDEX">
             Game-adjacent my whole career. <span style={{ color: PALETTE.mint }}>Now pivoting on purpose.</span>
@@ -166,7 +172,9 @@ function SectionGames() {
       </div>
 
       <div style={{
-        marginTop: 28, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16,
+        marginTop: 28, display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+        gap: 16,
       }}>
         {GAME_PROJECTS.map((p, i) => <GameCard key={p.title} p={p} idx={i} />)}
       </div>

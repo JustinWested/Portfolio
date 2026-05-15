@@ -145,6 +145,7 @@ function SectionDesign() {
   const save = SAVES.find(s => s.id === 'design');
   const filmCount = DESIGN_PIECES.filter(p => p.kind === 'FILM').length;
   const stageCount = DESIGN_PIECES.filter(p => p.kind === 'STAGE').length;
+  const isMobile = useIsMobile();
   return (
     <SectionShell save={save}>
       <div style={{ marginBottom: 28 }}>
@@ -153,19 +154,22 @@ function SectionDesign() {
         </PanelTitle>
       </div>
 
-      {/* Poster wall — uniform 4-col grid */}
+      {/* Poster wall — 2-col on mobile so each poster still reads clearly */}
       <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14,
+        display: 'grid',
+        gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+        gap: isMobile ? 10 : 14,
       }}>
         {DESIGN_PIECES.map((p, i) => <DesignTile key={p.title} p={p} idx={i} />)}
       </div>
 
-      {/* Inventory footer — kept (real counts) */}
+      {/* Inventory footer — wraps on mobile */}
       <div style={{
         marginTop: 24, padding: '10px 18px',
         border: `1px solid ${PALETTE.borderMd}`,
         background: 'rgba(0,0,0,0.18)',
-        display: 'flex', alignItems: 'center', gap: 22,
+        display: 'flex', alignItems: 'center',
+        gap: isMobile ? 12 : 22, flexWrap: 'wrap',
         fontFamily: FONT_MONO, fontSize: 10, letterSpacing: 1.4, color: PALETTE.textMid,
       }}>
         <span>INVENTORY · {DESIGN_PIECES.length} ITEMS</span>
@@ -173,7 +177,7 @@ function SectionDesign() {
         <span>FILM · <span style={{ color: PALETTE.mint }}>{filmCount}</span></span>
         <span style={{ color: PALETTE.borderMd }}>│</span>
         <span>STAGE · <span style={{ color: PALETTE.mint }}>{stageCount}</span></span>
-        <span style={{ flex: 1 }} />
+        {!isMobile && <span style={{ flex: 1 }} />}
         <span style={{ color: PALETTE.textLo }}>ALL PIECES PAID CLIENT WORK</span>
       </div>
     </SectionShell>

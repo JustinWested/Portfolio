@@ -52,15 +52,21 @@ const WEB_PROJECTS = [
 ];
 
 function WebProjectCard({ p, idx }) {
+  const isMobile = useIsMobile();
   return (
     <div style={{
       border: `1px solid ${PALETTE.borderMd}`, background: PALETTE.surface,
-      display: 'grid', gridTemplateColumns: '380px 1fr', gap: 0,
-      position: 'relative',
+      display: 'grid',
+      gridTemplateColumns: isMobile ? '1fr' : '380px 1fr',
+      gap: 0, position: 'relative',
     }}>
       {/* Screenshot side */}
-      <div style={{ position: 'relative', borderRight: `1px solid ${PALETTE.borderLo}` }}>
-        <ImageSlot src={p.img} alt={p.title} height={320} />
+      <div style={{
+        position: 'relative',
+        borderRight: isMobile ? 'none' : `1px solid ${PALETTE.borderLo}`,
+        borderBottom: isMobile ? `1px solid ${PALETTE.borderLo}` : 'none',
+      }}>
+        <ImageSlot src={p.img} alt={p.title} height={isMobile ? 220 : 320} />
         <div style={{
           position: 'absolute', top: 12, left: 12,
           padding: '3px 8px', background: 'rgba(8,19,32,0.85)',
@@ -82,12 +88,22 @@ function WebProjectCard({ p, idx }) {
       </div>
 
       {/* Body */}
-      <div style={{ padding: '22px 26px 24px', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
+      <div style={{
+        padding: isMobile ? '18px 18px 20px' : '22px 26px 24px',
+        display: 'flex', flexDirection: 'column', minWidth: 0,
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: isMobile ? 'flex-start' : 'baseline',
+          flexDirection: isMobile ? 'column' : 'row',
+          gap: isMobile ? 8 : 0,
+          marginBottom: 4,
+        }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 9, color: PALETTE.textLo, letterSpacing: 1.8 }}>
             ENTRY {String(idx + 1).padStart(2, '0')} · {p.tag}
           </div>
-          <div style={{ display: 'flex', gap: 5 }}>
+          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
             {p.stack.map(t => (
               <span key={t} style={{
                 fontFamily: FONT_MONO, fontSize: 9, letterSpacing: 1.4, color: PALETTE.mint,
@@ -97,11 +113,13 @@ function WebProjectCard({ p, idx }) {
           </div>
         </div>
         <h3 style={{
-          fontFamily: FONT_DISPLAY, fontSize: 28, fontWeight: 700, color: PALETTE.textHi,
+          fontFamily: FONT_DISPLAY,
+          fontSize: isMobile ? 22 : 28,
+          fontWeight: 700, color: PALETTE.textHi,
           letterSpacing: -0.4, margin: '4px 0 10px',
         }}>{p.title}</h3>
         <p style={{
-          fontFamily: FONT_DISPLAY, fontSize: 15, lineHeight: 1.55,
+          fontFamily: FONT_DISPLAY, fontSize: isMobile ? 14 : 15, lineHeight: 1.55,
           color: PALETTE.textMid, margin: '0 0 18px',
         }}>{p.blurb}</p>
 
@@ -141,6 +159,7 @@ function WebProjectCard({ p, idx }) {
 
 function SectionWeb() {
   const save = SAVES.find(s => s.id === 'web');
+  const isMobile = useIsMobile();
   return (
     <SectionShell save={save}>
       <PanelTitle kicker="WEB · #web" code="01·INDEX">
@@ -160,10 +179,12 @@ function SectionWeb() {
 
       {/* Stack readout footer */}
       <div style={{
-        marginTop: 36, padding: '18px 22px',
+        marginTop: isMobile ? 24 : 36, padding: '18px 22px',
         border: `1px solid ${PALETTE.borderMd}`,
         background: 'linear-gradient(180deg, rgba(126,220,200,0.03), transparent)',
-        display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 22,
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr 1fr' : '1fr 1fr 1fr 1fr',
+        gap: isMobile ? 14 : 22,
       }}>
         {[
           ['CURRENT STACK', 'React · TypeScript · Next.js · Tailwind'],

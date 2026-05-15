@@ -2,13 +2,18 @@
 
 function SectionAbout() {
   const save = SAVES.find(s => s.id === 'about');
+  const isMobile = useIsMobile();
   return (
     <SectionShell save={save}>
-      <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr 320px', gap: 32 }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '320px 1fr 320px',
+        gap: isMobile ? 24 : 32,
+      }}>
         {/* LEFT — portrait + base info */}
         <div>
           <div style={{ position: 'relative' }}>
-            <ImageSlot src="assets/justinwested.webp" alt="Justin Wested" height={360} />
+            <ImageSlot src="assets/justinwested.webp" alt="Justin Wested" height={isMobile ? 280 : 360} />
             <CornerBrackets color={PALETTE.mint} size={14} thickness={1.5} inset={-3} />
             <div style={{
               position: 'absolute', bottom: -8, left: '50%', transform: 'translateX(-50%)',
@@ -38,7 +43,7 @@ function SectionAbout() {
         {/* CENTER — bio + abilities */}
         <div>
           <PanelTitle kicker="ABOUT · #about" code="00·A">
-            Frontend developer & <span style={{ color: PALETTE.mint }}>game tester.</span>
+            Software engineer & <span style={{ color: PALETTE.mint }}>game tester.</span>
           </PanelTitle>
 
           <p style={{ fontFamily: FONT_DISPLAY, fontSize: 17, lineHeight: 1.6, color: PALETTE.textMid, margin: '0 0 14px' }}>

@@ -21,7 +21,7 @@ const SAVES = [
   {
     id: 'web', code: '01', anchor: '#web',
     name: 'WEB DEVELOPMENT',
-    role: 'Frontend Engineer',
+    role: 'Software Engineer',
     metrics: [
       { k: 'PROJECTS', v: '16 SHIPPED' },
       { k: 'SINCE', v: '2022' },

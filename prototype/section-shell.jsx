@@ -3,15 +3,18 @@
 
 function SectionShell({ save, children, accentColor }) {
   const accent = accentColor || statusToColor(save.statusColor);
+  const isMobile = useIsMobile();
+  const pad = isMobile ? 16 : 56;
   return (
     <section id={save.id} style={{
-      minHeight: '100vh', padding: '80px 56px 60px',
+      minHeight: '100vh',
+      padding: isMobile ? '52px 16px 40px' : '80px 56px 60px',
       position: 'relative',
       borderTop: `1px solid ${PALETTE.borderLo}`,
     }}>
       {/* "FILE LOADED" loading bar — decorative */}
       <div style={{
-        position: 'absolute', top: 0, left: 56, right: 56, height: 2,
+        position: 'absolute', top: 0, left: pad, right: pad, height: 2,
         background: PALETTE.borderLo, overflow: 'hidden',
       }}>
         <div style={{
@@ -25,17 +28,22 @@ function SectionShell({ save, children, accentColor }) {
       <div style={{
         border: `1px solid ${PALETTE.borderMd}`,
         background: 'linear-gradient(180deg, rgba(126,220,200,0.04), rgba(0,0,0,0.05))',
-        padding: '18px 22px', marginBottom: 36,
-        display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: 24, alignItems: 'center',
+        padding: isMobile ? '14px 16px' : '18px 22px',
+        marginBottom: isMobile ? 24 : 36,
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : 'auto 1fr auto',
+        gap: isMobile ? 14 : 24,
+        alignItems: 'center',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 14 : 18 }}>
           <div style={{
-            fontFamily: FONT_PIXEL, fontSize: 56, lineHeight: 0.85,
-            color: accent, letterSpacing: 1,
+            fontFamily: FONT_PIXEL,
+            fontSize: isMobile ? 42 : 56,
+            lineHeight: 0.85, color: accent, letterSpacing: 1,
           }}>
             {save.code}
           </div>
-          <div>
+          <div style={{ minWidth: 0 }}>
             <div style={{
               fontFamily: FONT_MONO, fontSize: 10, color: PALETTE.textLo, letterSpacing: 2, marginBottom: 3,
               display: 'flex', alignItems: 'center', gap: 8,
@@ -44,18 +52,24 @@ function SectionShell({ save, children, accentColor }) {
               FILE LOADED · {save.anchor}
             </div>
             <div style={{
-              fontFamily: FONT_DISPLAY, fontSize: 30, fontWeight: 700, color: PALETTE.textHi,
-              letterSpacing: -0.5, lineHeight: 1,
+              fontFamily: FONT_DISPLAY,
+              fontSize: isMobile ? 22 : 30,
+              fontWeight: 700, color: PALETTE.textHi,
+              letterSpacing: -0.5, lineHeight: 1.05,
             }}>{save.name}</div>
             <div style={{
-              fontFamily: FONT_DISPLAY, fontSize: 14, color: PALETTE.textMid,
+              fontFamily: FONT_DISPLAY, fontSize: isMobile ? 13 : 14, color: PALETTE.textMid,
               fontStyle: 'italic', marginTop: 2,
             }}>{save.role}</div>
           </div>
         </div>
 
         {/* mid: tags */}
-        <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', alignSelf: 'flex-end', maxWidth: 320 }}>
+        <div style={{
+          display: 'flex', gap: 5, flexWrap: 'wrap',
+          alignSelf: isMobile ? 'flex-start' : 'flex-end',
+          maxWidth: isMobile ? '100%' : 320,
+        }}>
           {save.tags.map(t => (
             <span key={t} style={{
               fontFamily: FONT_MONO, fontSize: 10, letterSpacing: 1.5,
@@ -65,10 +79,15 @@ function SectionShell({ save, children, accentColor }) {
           ))}
         </div>
 
-        {/* right: stats */}
+        {/* right: stats — 2 col on mobile, 4 col on desktop */}
         <div style={{
-          display: 'grid', gridTemplateColumns: 'auto auto auto auto', gap: '0 22px',
-          borderLeft: `1px solid ${PALETTE.borderLo}`, paddingLeft: 22,
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr 1fr' : 'auto auto auto auto',
+          gap: isMobile ? '10px 14px' : '0 22px',
+          borderLeft: isMobile ? 'none' : `1px solid ${PALETTE.borderLo}`,
+          borderTop: isMobile ? `1px solid ${PALETTE.borderLo}` : 'none',
+          paddingLeft: isMobile ? 0 : 22,
+          paddingTop: isMobile ? 12 : 0,
         }}>
           {[
             ...save.metrics.map(m => [m.k, m.v, m.k === 'LAST SAVE' ? PALETTE.textMid : PALETTE.textHi]),

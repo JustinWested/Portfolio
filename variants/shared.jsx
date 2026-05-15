@@ -190,6 +190,29 @@ function ImageSlot({ src, alt, height = 200, ratio, label, kind = 'image' }) {
   );
 }
 
+// Responsive helper — single hook used across components to swap inline-style
+// values for mobile. Breakpoint is 768px; below that we stack columns and
+// shrink display-size type.
+function useMediaQuery(query) {
+  const get = () => typeof window !== 'undefined' && window.matchMedia(query).matches;
+  const [matches, setMatches] = React.useState(get);
+  React.useEffect(() => {
+    const mq = window.matchMedia(query);
+    const handler = (e) => setMatches(e.matches);
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else mq.addListener(handler);
+    setMatches(mq.matches);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', handler);
+      else mq.removeListener(handler);
+    };
+  }, [query]);
+  return matches;
+}
+
+const useIsMobile = () => useMediaQuery('(max-width: 768px)');
+
 Object.assign(window, {
   PALETTE, PulseDot, StripedPlaceholder, ImageSlot, CornerBrackets, Scanlines, Caret, JUSTIN,
+  useMediaQuery, useIsMobile,
 });
