@@ -120,7 +120,7 @@ function Hero({ onSelect }) {
         position: 'relative', zIndex: 1,
         display: 'flex', alignItems: 'center', gap: 16, marginBottom: 60,
       }}>
-        <img src="https://justinwested.pages.dev/images/helix.webp" alt=""
+        <img src="assets/helix.webp" alt=""
           style={{ width: 22, height: 22, objectFit: 'contain' }}
         />
         <div style={{
@@ -174,7 +174,7 @@ function Hero({ onSelect }) {
             border: `1px solid ${PALETTE.borderMd}`, background: PALETTE.surface,
             padding: '12px 20px',
           }}>
-            <img src="https://justinwested.pages.dev/images/justinwested.webp" alt=""
+            <img src="assets/justinwested.webp" alt=""
               style={{
                 width: 44, height: 44, objectFit: 'cover', objectPosition: 'center top',
                 border: `1px solid ${PALETTE.mint}`,

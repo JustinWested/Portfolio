@@ -15,7 +15,7 @@ const SAVES = [
     statusColor: 'mint',
     tags: ['BIO', 'INDEX'],
     thumb: 'JUSTIN · PORTRAIT',
-    thumbImg: 'https://justinwested.pages.dev/images/justinwested.webp',
+    thumbImg: 'assets/justinwested.webp',
     summary: 'Who you\'re looking at.',
   },
   {

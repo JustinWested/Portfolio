@@ -8,7 +8,7 @@ function SectionAbout() {
         {/* LEFT — portrait + base info */}
         <div>
           <div style={{ position: 'relative' }}>
-            <ImageSlot src="https://justinwested.pages.dev/images/justinwested.webp" alt="Justin Wested" height={360} />
+            <ImageSlot src="assets/justinwested.webp" alt="Justin Wested" height={360} />
             <CornerBrackets color={PALETTE.mint} size={14} thickness={1.5} inset={-3} />
             <div style={{
               position: 'absolute', bottom: -8, left: '50%', transform: 'translateX(-50%)',

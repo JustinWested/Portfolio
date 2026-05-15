@@ -100,7 +100,7 @@ function StickyTabBar({ active, onSelect, visible }) {
         display: 'flex', alignItems: 'center', gap: 18,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-          <img src="https://justinwested.pages.dev/images/helix.webp" alt=""
+          <img src="assets/helix.webp" alt=""
             style={{ width: 22, height: 22, objectFit: 'contain' }}
           />
           <span style={{
